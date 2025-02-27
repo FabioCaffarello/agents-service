@@ -32,12 +32,13 @@ lint:
 
 ## Run tests using pytest
 check:
-	$(PYTHON) run pytest $(TEST_DIR)
+	$(PYTHON) run pytest $(PACKAGES_DIR)
 
 ## Run tests using pytest with coverage
 coverage:
 	rm -f .coverage*
 	$(PYTHON) run pytest --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
+
 ## Run pre-commit hooks
 precommit:
 	pre-commit run --all-files
