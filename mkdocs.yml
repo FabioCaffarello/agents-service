@@ -43,7 +43,7 @@ plugins:
       nav_file: summary.md
 
 watch:
-  - src
+  - packages
 
 extra_css:
   - css/github-permalink-style.css

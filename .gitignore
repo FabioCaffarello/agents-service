@@ -14,3 +14,10 @@ logs/
 
 # Pre-commit cache
 .pre-commit/
+
+# Build files
+build/
+dist/
+
+# Coverage
+.coverage

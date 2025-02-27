@@ -1,0 +1,19 @@
+[project]
+name = "logger"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Fabio Caffarello", email = "fabio.caffarello@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "python-json-logger==3.2.1"
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/logger"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

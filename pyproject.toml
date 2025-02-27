@@ -6,13 +6,27 @@ authors = [{name = "Fabio Luiz Meireles Caffarello", email = "fabio.caffarello@g
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "logger"
 ]
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+logger = { workspace = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/server"]
+
+[project.scripts]
+main = "server.main:main"
 
 [project.optional-dependencies]
 dev = [
     "pre-commit>=4.1.0",
     "pytest>=8.3.4",
     "ruff>=0.9.7",
+    "pytest-cov>=6.0.0",
 ]
 docs = [
     "mkdocs>=1.6.1",
@@ -27,3 +41,7 @@ docs = [
     "mkdocstrings-python>=1.16.2",
     "plantuml-markdown>=3.11.1",
 ]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
