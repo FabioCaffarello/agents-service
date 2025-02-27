@@ -30,6 +30,9 @@ format:
 lint:
 	$(PYTHON) run ruff check $(SRC_DIR) $(PACKAGES_DIR) $(TEST_DIR)
 
+lint-docstrings:
+	$(PYTHON) run pydoclint --style=google --check-return-types=false --exclude=.venv .
+
 ## Run tests using pytest
 check:
 	$(PYTHON) run pytest $(PACKAGES_DIR)
@@ -62,6 +65,7 @@ precommit:
 
 ## Generate documentation using MkDocs
 server-docs:
+	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
 	$(PYTHON) run -- python -m mkdocs serve
 
 ## Deploy documentation to GitHub Pages
