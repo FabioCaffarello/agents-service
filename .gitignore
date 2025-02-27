@@ -1,0 +1,16 @@
+# Virtual Environment
+.uv/
+
+# Python Bytecode
+__pycache__/
+
+# Logs
+logs/
+*.log
+
+# Editor Settings
+.vscode/
+.idea/
+
+# Pre-commit cache
+.pre-commit/

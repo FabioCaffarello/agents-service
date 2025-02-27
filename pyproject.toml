@@ -1,0 +1,10 @@
+[project]
+name = "agents-service"
+version = "0.1.0"
+description = "An agentic microservice using LangGraph"
+authors = [{name = "Fabio Luiz Meireles Caffarello", email = "fabio.caffarello@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pre-commit>=4.1.0",
+]

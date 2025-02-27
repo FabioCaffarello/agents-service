@@ -1,0 +1,57 @@
+repos:
+  # Basic code quality checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-toml
+      - id: check-ast  # Check Python files for syntax errors
+
+  # Linting + Formatting (Replaces Black)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.9.7
+    hooks:
+      - id: ruff
+      - id: ruff-format  # Auto-format code like Black
+
+  # Commit linting (Conventional Commits)
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.2.2
+    hooks:
+      - id: commitizen
+        args: ["check", "--allow-abort"]
+
+  # Security checks (detects secrets & vulnerabilities)
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.4.0
+    hooks:
+      - id: detect-secrets  # Detect sensitive data (e.g., API keys)
+
+  # Check for security vulnerabilities in dependencies
+  - repo: local
+    hooks:
+      - id: safety
+        name: safety
+        entry: safety check --full-report
+        language: system
+        types: [python]
+
+  # Dockerfile best practices
+  - repo: local
+    hooks:
+      - id: hadolint
+        name: Hadolint
+        entry: hadolint
+        language: system
+        files: Dockerfile
+
+  # Shell script linting & security
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck
+        name: ShellCheck
+        files: \.sh$
