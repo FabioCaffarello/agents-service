@@ -1,6 +1,6 @@
-site_name: NX AI Plugin
+site_name: Agents Service
 
-repo_url: https://github.com/FabioCaffarello/nx-ai-plugin
+repo_url: https://github.com/FabioCaffarello/agents-service
 edit_uri: src/main/docs/
 
 theme:
