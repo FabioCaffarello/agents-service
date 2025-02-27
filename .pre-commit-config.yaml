@@ -49,7 +49,6 @@ repos:
         pass_filenames: false
         types: [python]
 
-
   # Dockerfile best practices
   - repo: local
     hooks:
@@ -67,16 +66,6 @@ repos:
         name: ShellCheck
         files: \.sh$
 
-  # Custom local hook to run `make clean`
-  - repo: local
-    hooks:
-      - id: make-clean
-        name: Run Make Clean
-        entry: make clean
-        language: system
-        always_run: true
-        pass_filenames: false
-
   - repo: https://github.com/jsh9/pydoclint
     rev: 0.6.2
     hooks:
@@ -90,4 +79,15 @@ repos:
         name: Run `make coverage` before push
         entry: make coverage
         language: system
+        stages: [push]
+
+  # Custom local hook to run `make clean`
+  - repo: local
+    hooks:
+      - id: make-clean
+        name: Run Make Clean
+        entry: make clean
+        language: system
+        always_run: true
+        pass_filenames: false
         stages: [push]
