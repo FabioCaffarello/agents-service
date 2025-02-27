@@ -1,4 +1,3 @@
-import json
 from pathlib import Path
 
 import mkdocs_gen_files
@@ -20,11 +19,7 @@ def process_patterns(project_path, custom_patterns):
 # Process parent directories containing multiple projects
 def walk_and_process_parent_dir(project_path):
     parent_path = project_path.parent
-    while (
-        parent_path != src_root.joinpath("libs")
-        and path != src_root.joinpath("services")
-        and path != src_root.joinpath("chalanges")
-    ):
+    while parent_path != src_root.joinpath("packages"):
         dir_path = str(parent_path)
         if parent_path == src_root:
             break
@@ -39,12 +34,11 @@ def walk_and_process_parent_dir(project_path):
 
 
 # Process individual projects
-for path in src_root.rglob("project.json"):
+for path in src_root.rglob("pyproject.toml"):
     walk_and_process_parent_dir(path.parent)
 
     project_path = str(path.parent)
     with open(path, "r") as project_file:
-        project = json.loads(project_file.read())
         custom_patterns = [
             # OpenAPI Specs
             f"{project_path}/docs/openapi/*.json",
