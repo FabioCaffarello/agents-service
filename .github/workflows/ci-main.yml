@@ -158,7 +158,7 @@ jobs:
             // Read the entire coverage report from cov-report.txt
             const reportText = fs.readFileSync('cov-report.txt', 'utf8');
 
-            // Extract the summary table: from the first occurrence of "Name" until the line starting with "Coverage HTML written"
+            // Extract the summary table: from the first occurrence of "Name" until "Coverage HTML written"
             let startIndex = reportText.indexOf("Name");
             let endIndex = reportText.indexOf("Coverage HTML written");
             let tableText = "";
@@ -168,17 +168,16 @@ jobs:
               tableText = reportText;
             }
 
-            // Extract overall coverage from the TOTAL line
+            // Find the line that starts with 'TOTAL' to extract overall coverage
             const totalLine = reportText.split('\n').find(line => line.trim().startsWith("TOTAL"));
             let overallCoverage = "N/A";
             if (totalLine) {
+              // Split by whitespace and take the last element as the coverage percentage
               const parts = totalLine.trim().split(/\s+/);
-              if (parts.length >= 4) {
-                overallCoverage = parts[3] + "%";
-              }
+              overallCoverage = parts[parts.length - 1];
             }
 
-            // Build a master comment with a summary and a collapsible section for details
+            // Construct the master comment with a summary and a collapsible section for details
             const commentBody = `
             **Master Coverage Report**
 
@@ -193,6 +192,7 @@ jobs:
             </details>
                   `;
 
+            // Post the comment on the PR
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
