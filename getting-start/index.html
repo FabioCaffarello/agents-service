@@ -118,22 +118,12 @@
       </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../reference/src">
+<a class="md-tabs__link" href="../reference/packages">
         
   
     
   
-  src
-
-      </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../dependency-graph/index.html?select=all#/projects/all?groupByFolder=true">
-        
-  
-    
-  
-  Dependency Graph
+  Packages
 
       </a>
 </li>
@@ -175,25 +165,106 @@
 </li>
 <li class="md-nav__item md-nav__item--active">
 <input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Getting Start
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
 <a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     Getting Start
     
   </span>
 </a>
-</li>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="../reference/src">
+<a class="md-nav__link" href="#prerequisites">
 <span class="md-ellipsis">
-    src
-    
-  </span>
+      Prerequisites
+    </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../dependency-graph/index.html?select=all#/projects/all?groupByFolder=true">
+<a class="md-nav__link" href="#1-clone-the-repository">
 <span class="md-ellipsis">
-    Dependency Graph
+      1. Clone the Repository
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-set-up-the-virtual-environment">
+<span class="md-ellipsis">
+      2. Set Up the Virtual Environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-running-the-service">
+<span class="md-ellipsis">
+      3. Running the Service
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-linting-and-code-quality">
+<span class="md-ellipsis">
+      5. Linting and Code Quality
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-documentation">
+<span class="md-ellipsis">
+      6. Documentation
+    </span>
+</a>
+<nav aria-label="6. Documentation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#serve-documentation-locally">
+<span class="md-ellipsis">
+      Serve Documentation Locally
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-documentation">
+<span class="md-ellipsis">
+      Deploy Documentation
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-additional-commands">
+<span class="md-ellipsis">
+      7. Additional Commands
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-troubleshooting">
+<span class="md-ellipsis">
+      8. Troubleshooting
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../reference/packages">
+<span class="md-ellipsis">
+    Packages
     
   </span>
 </a>
@@ -207,6 +278,86 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prerequisites">
+<span class="md-ellipsis">
+      Prerequisites
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#1-clone-the-repository">
+<span class="md-ellipsis">
+      1. Clone the Repository
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#2-set-up-the-virtual-environment">
+<span class="md-ellipsis">
+      2. Set Up the Virtual Environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#3-running-the-service">
+<span class="md-ellipsis">
+      3. Running the Service
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#5-linting-and-code-quality">
+<span class="md-ellipsis">
+      5. Linting and Code Quality
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#6-documentation">
+<span class="md-ellipsis">
+      6. Documentation
+    </span>
+</a>
+<nav aria-label="6. Documentation" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#serve-documentation-locally">
+<span class="md-ellipsis">
+      Serve Documentation Locally
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#deploy-documentation">
+<span class="md-ellipsis">
+      Deploy Documentation
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#7-additional-commands">
+<span class="md-ellipsis">
+      7. Additional Commands
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#8-troubleshooting">
+<span class="md-ellipsis">
+      8. Troubleshooting
+    </span>
+</a>
+</li>
+</ul>
 </nav>
 </div>
 </div>
@@ -214,6 +365,107 @@
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
 <h1 id="getting-started-with-agents-service">Getting Started with Agents Service<a class="headerlink" href="#getting-started-with-agents-service" title="Permanent link"></a></h1>
+<p>Welcome to <strong>Agents Service</strong> – an agentic microservice built using LangGraph. This guide will help you set up the project on your local machine, run the service, and get started with development.</p>
+<hr/>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link"></a></h2>
+<p>Before you begin, ensure you have the following installed:</p>
+<ul>
+<li><strong>Python 3.12</strong> or higher</li>
+<li><strong>uv</strong> – a modern dependency and environment manager
+  <em>(Installation instructions: <a href="https://github.com/astral-sh/uv">uv GitHub Repository</a>)</em></li>
+<li><strong>Docker</strong></li>
+</ul>
+<hr/>
+<h2 id="1-clone-the-repository">1. Clone the Repository<a class="headerlink" href="#1-clone-the-repository" title="Permanent link"></a></h2>
+<p>First, clone the repository from GitHub:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/FabioCaffarello/agents-service.git
+<a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">cd</span><span class="w"> </span>agents-service
+</code></pre></div>
+<hr/>
+<h2 id="2-set-up-the-virtual-environment">2. Set Up the Virtual Environment<a class="headerlink" href="#2-set-up-the-virtual-environment" title="Permanent link"></a></h2>
+<p>Your project uses <strong>uv</strong> to manage the virtual environment and dependencies. The Makefile includes a <code>setup</code> target that handles environment creation, dependency installation, and pre-commit hook setup.</p>
+<p>Run the following command to set up the project:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>make<span class="w"> </span>setup
+</code></pre></div>
+<p>This command performs the following steps:
+- Creates a virtual environment in the <code>.venv</code> directory.
+- Installs all dependencies including development and documentation extras.
+- Sets executable permissions on the branch-check script.
+- Installs the pre-commit hooks for both commit and push stages.</p>
+<hr/>
+<h2 id="3-running-the-service">3. Running the Service<a class="headerlink" href="#3-running-the-service" title="Permanent link"></a></h2>
+<p>To start the development server (with auto-reload), run:</p>
+<p>&lt;!-- ```bash
+uv run python -m uvicorn src.main:app --reload
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>Then, open your browser and visit [http://127.0.0.1:8000](http://127.0.0.1:8000) to view the service.
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>--- --&gt;
+<a href="#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>
+<a href="#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>## 4. Running Tests
+<a href="#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a href="#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>To run the test suite, use the Makefile target for checking tests:
+<a href="#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>
+<a href="#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>```bash
+<a href="#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>make check
+</code></pre></div></p>
+<p>This command executes <code>pytest</code> within the uv-managed environment.</p>
+<hr/>
+<h2 id="5-linting-and-code-quality">5. Linting and Code Quality<a class="headerlink" href="#5-linting-and-code-quality" title="Permanent link"></a></h2>
+<p>To format and lint your code, use the following targets:</p>
+<ul>
+<li><strong>Format Code (using Ruff):</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>make<span class="w"> </span>format
+</code></pre></div>
+<ul>
+<li><strong>Lint Code (using Ruff):</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>make<span class="w"> </span>lint
+</code></pre></div>
+<ul>
+<li><strong>Run Pre-commit Hooks:</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>make<span class="w"> </span>precommit
+</code></pre></div>
+<hr/>
+<h2 id="6-documentation">6. Documentation<a class="headerlink" href="#6-documentation" title="Permanent link"></a></h2>
+<h3 id="serve-documentation-locally">Serve Documentation Locally<a class="headerlink" href="#serve-documentation-locally" title="Permanent link"></a></h3>
+<p>Your project documentation is managed with MkDocs. To serve the docs locally with live-reloading, run:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>make<span class="w"> </span>server-docs
+</code></pre></div>
+<p>Then, visit <a href="http://127.0.0.1:8000">http://127.0.0.1:8000</a> in your browser.</p>
+<h3 id="deploy-documentation">Deploy Documentation<a class="headerlink" href="#deploy-documentation" title="Permanent link"></a></h3>
+<p>To deploy the documentation to GitHub Pages, run:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>make<span class="w"> </span>deploy-docs
+</code></pre></div>
+<p>This command will build the documentation and push it to the appropriate branch for GitHub Pages.</p>
+<hr/>
+<h2 id="7-additional-commands">7. Additional Commands<a class="headerlink" href="#7-additional-commands" title="Permanent link"></a></h2>
+<p>For other tasks, refer to the Makefile by running:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>make<span class="w"> </span><span class="nb">help</span>
+</code></pre></div>
+<p>This will list all available commands and their descriptions.</p>
+<hr/>
+<h2 id="8-troubleshooting">8. Troubleshooting<a class="headerlink" href="#8-troubleshooting" title="Permanent link"></a></h2>
+<ul>
+<li>
+<p><strong>Virtual Environment Issues:</strong>
+  If you encounter any issues with the virtual environment, try running <code>make clean</code> to clear caches and temporary files, then run <code>make setup</code> again.</p>
+</li>
+<li>
+<p><strong>Pre-commit Hooks:</strong>
+  If pre-commit hooks aren’t running as expected, ensure they’re installed by running:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>pre-commit<span class="w"> </span>install
+</code></pre></div>
+<ul>
+<li><strong>Dependency Updates:</strong>
+  When you update your dependencies in <code>pyproject.toml</code>, remember to run:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>uv<span class="w"> </span>lock
+</code></pre></div>
+<p>to update the lock file.</p>
 </article>
 </div>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
