@@ -131,8 +131,23 @@ jobs:
         run: |
           uv run ${{ inputs.final-commands }}
 
-      - name: Comment Coverage on PR
+      - name: Post Coverage Report as PR Comment
         if: ${{ github.event_name == 'pull_request' }}
-        uses: benc-uk/coverage-comment-action@v2
+        uses: actions/github-script@v6
         with:
-          coverage-path: coverage.xml
+          script: |
+            const fs = require('fs');
+            // Read the generated coverage.xml file
+            const coverageXml = fs.readFileSync('coverage.xml', 'utf8');
+            // You might want to process or shorten this output
+            const commentBody = `
+            \`\`\`xml
+            ${coverageXml}
+            \`\`\`
+            `;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
