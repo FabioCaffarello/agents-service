@@ -117,16 +117,11 @@ jobs:
         run: uv venv .venv
 
       # ---------------------------------------------------
-      # 9) INSTALL PROJECT DEPENDENCIES INCLUDING DEV/DOCS GROUPS
+      # 9) INSTALL PROJECT DEPENDENCIES (including dev/docs)
       # ---------------------------------------------------
       - name: Install project dependencies
         run: |
-          # Install both the default dependencies and the additional groups
-          uv install --group dev --group docs
-          if [ -n "${{ inputs.install-commands }}" ]; then
-            echo "Running additional install commands..."
-            eval "${{ inputs.install-commands }}"
-          fi
+          uv sync -all-extras
 
       # ---------------------------------------------------
       # 10) RUN FINAL COMMANDS WITH ENV ACTIVATED
