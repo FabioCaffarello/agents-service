@@ -145,28 +145,3 @@ jobs:
         with:
           name: coverage-html
           path: htmlcov
-
-      # ---------------------------------------------------
-      # 13) POST COVERAGE COMMENT ON PR
-      # ---------------------------------------------------
-      - name: Post Coverage Report as PR Comment
-        if: ${{ github.event_name == 'pull_request' && inputs.use-coverage == true }}
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const coverageXml = fs.readFileSync('coverage.xml', 'utf8');
-            // Extract overall line-rate from the <coverage> tag
-            const match = coverageXml.match(/<coverage[^>]*line-rate="([\d.]+)"/);
-            const overall = match ? (parseFloat(match[1]) * 100).toFixed(1) : 'N/A';
-            const commentBody = `
-            **Coverage Report:** ${overall}%
-
-            View the detailed HTML report in the uploaded artifact.
-            `;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: commentBody
-            });
