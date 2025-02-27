@@ -141,7 +141,7 @@ jobs:
       # ---------------------------------------------------
       - name: Upload Coverage HTML Report
         if: ${{ github.event_name == 'pull_request' && inputs.use-coverage == true }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-html
           path: htmlcov
