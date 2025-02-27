@@ -36,6 +36,8 @@ check:
 
 ## Run tests using pytest with coverage
 coverage:
+	@echo "Erasing old coverage files (excluding .coveragerc)..."
+	find . -maxdepth 1 -type f -name ".coverage*" ! -name ".coveragerc" -exec rm -f {} +
 	uv run coverage erase
 	$(PYTHON) run pytest --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
 
