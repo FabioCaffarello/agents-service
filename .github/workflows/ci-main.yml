@@ -129,5 +129,4 @@ jobs:
       - name: Run final commands
         if: ${{ inputs.final-commands != '' }}
         run: |
-          source .venv/bin/activate
-          eval "${{ inputs.final-commands }}"
+          uv run ${ { inputs.final-commands } }
