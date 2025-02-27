@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"index","text":""},{"location":"getting-start/","title":"Getting Started with Agents Service","text":""},{"location":"summary/","title":"Summary","text":"<ul> <li>Home</li> <li>Getting Start</li> <li>src</li> <li>Dependency Graph</li> </ul>"}]}
