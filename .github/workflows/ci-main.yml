@@ -137,7 +137,7 @@ jobs:
           uv run ${{ inputs.final-commands }}
 
       - name: Post Coverage Report as PR Comment
-        if: ${{ github.event_name == 'pull_request' }} && ${{ inputs.use-coverage == true }}
+        if: ${{ github.event_name == 'pull_request' && inputs.use-coverage == true }}
         uses: actions/github-script@v6
         with:
           script: |

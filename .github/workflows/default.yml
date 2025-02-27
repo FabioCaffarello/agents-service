@@ -8,6 +8,7 @@ jobs:
     name: Lint
     uses: ./.github/workflows/ci-main.yml
     with:
+      use-coverage: false
       final-commands: |
         make lint
 
