@@ -35,11 +35,11 @@ precommit:
 
 ## Generate documentation using MkDocs
 server-docs:
-	$(PYTHON) run mkdocs serve
+	$(PYTHON) run -- python -m mkdocs serve
 
 ## Deploy documentation to GitHub Pages
 deploy-docs:
-	$(PYTHON) run mkdocs gh-deploy
+	$(PYTHON) run -- python -m mkdocs gh-deploy
 
 ## Clean up generated files
 clean:
