@@ -43,9 +43,7 @@ plugins:
       nav_file: summary.md
 
 watch:
-  - apps
-  - libs
-  - nx-ai-plugin
+  - src
 
 extra_css:
   - css/github-permalink-style.css
