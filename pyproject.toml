@@ -6,7 +6,8 @@ authors = [{name = "Fabio Luiz Meireles Caffarello", email = "fabio.caffarello@g
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "logger"
+    "logger",
+    "cliargs"
 ]
 
 [tool.uv.workspace]
@@ -14,6 +15,7 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 logger = { workspace = true }
+cliargs = { workspace = true }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/server"]

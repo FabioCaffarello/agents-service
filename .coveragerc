@@ -2,3 +2,15 @@
 omit =
     */tests/*
     */__pycache__/*
+    __init__.py
+source = packages
+branch = True
+parallel = False
+
+[report]
+show_missing = True
+skip_covered = False
+include = packages/*
+
+[html]
+directory = htmlcov
