@@ -11,4 +11,5 @@ jobs:
     uses: ./.github/workflows/ci-main.yml
     with:
       final-commands: |
-        echo "Running Docs"
+        docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
+        make deploy-docs

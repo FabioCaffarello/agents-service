@@ -1,4 +1,13 @@
 repos:
+  # Check branch name (e.g., feature/1234-branch-name)
+  - repo: local
+    hooks:
+      - id: branch-check
+        name: Branch Check (only allow feature/* or fix/*)
+        entry: ./scripts/branch-check.sh
+        language: system
+        stages: [commit]
+
   # Basic code quality checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
@@ -30,14 +39,16 @@ repos:
     hooks:
       - id: detect-secrets  # Detect sensitive data (e.g., API keys)
 
-  # Check for security vulnerabilities in dependencies
   - repo: local
     hooks:
       - id: safety
         name: safety
         entry: safety check --full-report
-        language: system
+        language: python
+        additional_dependencies: [safety>=2.3.4]
+        pass_filenames: false
         types: [python]
+
 
   # Dockerfile best practices
   - repo: local
