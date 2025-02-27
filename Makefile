@@ -13,6 +13,7 @@ help:
 setup:
 	uv venv .venv
 	uv sync
+	chmod +x scripts/branch-check.sh
 	pre-commit install --hook-type pre-commit
 	pre-commit install --hook-type pre-push
 

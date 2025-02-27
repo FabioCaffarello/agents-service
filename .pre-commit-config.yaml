@@ -1,4 +1,13 @@
 repos:
+  # Check branch name (e.g., feature/1234-branch-name)
+  - repo: local
+    hooks:
+      - id: branch-check
+        name: Branch Check (only allow feature/* or fix/*)
+        entry: ./scripts/branch-check.sh
+        language: system
+        stages: [commit]
+
   # Basic code quality checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
