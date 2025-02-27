@@ -17,5 +17,6 @@ jobs:
       - lint
     uses: ./.github/workflows/ci-main.yml
     with:
+      use-coverage: true
       final-commands: |
         make coverage-report
