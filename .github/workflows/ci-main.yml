@@ -129,4 +129,4 @@ jobs:
       - name: Run final commands
         if: ${{ inputs.final-commands != '' }}
         run: |
-          uv run ${ { inputs.final-commands } }
+          uv run ${{ inputs.final-commands }}
