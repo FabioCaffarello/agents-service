@@ -72,12 +72,12 @@ repos:
       - id: pydoclint
         args: [--style=google, --check-return-types=False]
 
-  # Custom pre-push hook to run coverage
+  # Custom hook to run check
   - repo: local
     hooks:
-      - id: pre-push-make-coverage
-        name: Run `make coverage` before push
-        entry: make coverage || true
+      - id: make-check
+        name: make check
+        entry: make check
         language: system
         stages: [push]
 

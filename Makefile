@@ -48,17 +48,16 @@ coverage-report:
 	@echo "Removing generated coverage file..."
 	rm -f .coverage.single
 
-## Run tests using pytest with coverage
+## Run tests using pytest with coverage and generate a report
 coverage:
-	@echo "Removing all coverage data..."
-	- find . -maxdepth 1 -type f -name ".coverage*" ! -name ".coveragerc" -exec rm -f {} +
+	@echo "Erasing old coverage files (excluding .coveragerc)..."
+	find . -maxdepth 1 -type f -name ".coverage*" ! -name ".coveragerc" -exec rm -f {} +
 	@echo "Erasing internal coverage data..."
 	uv run coverage erase
 	@echo "Running tests with coverage..."
-	uv run pytest --maxfail=1 --disable-warnings --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
-	@echo "Combining coverage data..."
-	uv run coverage combine || true
-
+	COVERAGE_FILE=.coverage.single $(PYTHON) run pytest --maxfail=1 --disable-warnings --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
+	@echo "Removing generated coverage file..."
+	rm -f .coverage.single
 
 
 ## Run pre-commit hooks
