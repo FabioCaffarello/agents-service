@@ -21,4 +21,4 @@ jobs:
     uses: ./.github/workflows/ci-main.yml
     with:
       final-commands: |
-        make test
+        echo "make check"

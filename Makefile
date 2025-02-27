@@ -3,7 +3,7 @@ PYTHON = uv
 SRC_DIR = src
 TEST_DIR = tests
 
-.PHONY: help setup format lint test precommit docs clean
+.PHONY: help setup format lint test precommit serve-docs deploy-docs clean
 
 ## Show all available commands
 help:
@@ -26,19 +26,20 @@ lint:
 	$(PYTHON) run ruff check $(SRC_DIR) $(TEST_DIR)
 
 ## Run tests using pytest
-# check:
-# 	$(PYTHON) run pytest $(TEST_DIR)
-test:
-	echo "No tests to run"
-
+check:
+	$(PYTHON) run pytest $(TEST_DIR)
 
 ## Run pre-commit hooks
 precommit:
 	pre-commit run --all-files
 
 ## Generate documentation using MkDocs
-docs:
-	mkdocs serve
+server-docs:
+	$(PYTHON) mkdocs serve
+
+## Deploy documentation to GitHub Pages
+deploy-docs:
+	$(PYTHON) mkdocs gh-deploy
 
 ## Clean up generated files
 clean:
