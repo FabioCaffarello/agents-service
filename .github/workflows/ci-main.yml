@@ -130,3 +130,9 @@ jobs:
         if: ${{ inputs.final-commands != '' }}
         run: |
           uv run ${{ inputs.final-commands }}
+
+      - name: Comment Coverage on PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: benc-uk/coverage-comment-action@v2
+        with:
+          coverage-path: coverage.xml
