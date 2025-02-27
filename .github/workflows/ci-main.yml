@@ -123,6 +123,9 @@ jobs:
         run: |
           uv sync --all-extras
 
+      - name: Debug - List installed packages
+        run: uv run pip freeze
+
       # ---------------------------------------------------
       # 10) RUN FINAL COMMANDS WITH ENV ACTIVATED
       # ---------------------------------------------------
