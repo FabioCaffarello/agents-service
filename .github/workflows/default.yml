@@ -1,4 +1,4 @@
-name: CI
+name: Deafult
 
 on:
   push:
@@ -16,6 +16,8 @@ jobs:
 
   check:
     name: Check
+    needs:
+      - lint
     uses: ./.github/workflows/ci-main.yml
     with:
       final-commands: |

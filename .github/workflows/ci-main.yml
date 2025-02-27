@@ -91,14 +91,33 @@ jobs:
       # 6) CACHE UV DEPENDENCIES
       #    (Assumes uv caches packages in ~/.cache/uv)
       # ---------------------------------------------------
-      - name: Define a cache dependency glob
+      - name: Define a cache dependency glob for uv dependencies
         uses: astral-sh/setup-uv@v5
         with:
           enable-cache: true
           cache-dependency-glob: "**/pyproject.toml"
 
       # ---------------------------------------------------
-      # 7) INSTALL PROJECT DEPENDENCIES
+      # 7) CACHE THE VIRTUAL ENVIRONMENT
+      # ---------------------------------------------------
+      - name: Cache .venv
+        id: cache-venv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ hashFiles('**/pyproject.toml') }}
+          restore-keys: |
+            venv-
+
+      # ---------------------------------------------------
+      # 8) CREATE UV VIRTUAL ENVIRONMENT (if not restored)
+      # ---------------------------------------------------
+      - name: Create uv virtual environment
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+        run: uv venv .venv
+
+      # ---------------------------------------------------
+      # 9) INSTALL PROJECT DEPENDENCIES
       # ---------------------------------------------------
       - name: Install project dependencies
         run: |
@@ -109,10 +128,10 @@ jobs:
           fi
 
       # ---------------------------------------------------
-      # 8) RUN FINAL COMMANDS WITH ENV ACTIVATED
+      # 10) RUN FINAL COMMANDS WITH ENV ACTIVATED
       # ---------------------------------------------------
       - name: Run final commands
         if: ${{ inputs.final-commands != '' }}
         run: |
-          source .uv/bin/activate
+          source .venv/bin/activate
           eval "${{ inputs.final-commands }}"
