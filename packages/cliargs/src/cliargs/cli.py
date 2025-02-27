@@ -6,10 +6,6 @@ argparse.ArgumentParser instance with common command-line options
 such as verbose output, debug mode, logging level, and version
 information. It is designed to simplify the creation of consistent
 CLI interfaces across multiple applications.
-
-Functions:
-    new_args_parser(description: str) -> argparse.ArgumentParser
-        Creates an ArgumentParser configured with standard arguments.
 """
 
 import argparse
