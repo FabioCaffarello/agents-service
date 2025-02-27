@@ -82,6 +82,6 @@ repos:
     hooks:
       - id: pre-push-make-test
         name: Run `make test` before push
-        entry: make test
+        entry: make coverage
         language: system
         stages: [push]
