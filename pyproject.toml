@@ -29,6 +29,7 @@ dev = [
     "pytest>=8.3.4",
     "ruff>=0.9.7",
     "pytest-cov>=6.0.0",
+    "pydoclint>=0.6.2",
 ]
 docs = [
     "mkdocs>=1.6.1",
@@ -42,6 +43,10 @@ docs = [
     "mkdocstrings>=0.28.2",
     "mkdocstrings-python>=1.16.2",
     "plantuml-markdown>=3.11.1",
+    "toml>=0.10.2",
+]
+labs = [
+    "ipykernel>=6.29.5",
 ]
 
 [build-system]

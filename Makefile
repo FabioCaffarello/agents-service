@@ -30,6 +30,9 @@ format:
 lint:
 	$(PYTHON) run ruff check $(SRC_DIR) $(PACKAGES_DIR) $(TEST_DIR)
 
+lint-docstrings:
+	$(PYTHON) run pydoclint --style=google --check-return-types=false --exclude=.venv .
+
 ## Run tests using pytest
 check:
 	$(PYTHON) run pytest $(PACKAGES_DIR)
@@ -45,7 +48,7 @@ coverage-report:
 	@echo "Removing generated coverage file..."
 	rm -f .coverage.single
 
-## Run tests using pytest with coverage
+## Run tests using pytest with coverage and generate a report
 coverage:
 	@echo "Erasing old coverage files (excluding .coveragerc)..."
 	find . -maxdepth 1 -type f -name ".coverage*" ! -name ".coveragerc" -exec rm -f {} +
@@ -56,12 +59,14 @@ coverage:
 	@echo "Removing generated coverage file..."
 	rm -f .coverage.single
 
+
 ## Run pre-commit hooks
 precommit:
 	pre-commit run --all-files
 
 ## Generate documentation using MkDocs
 server-docs:
+	docker run -d -p 8080:8080 plantuml/plantuml-server:jetty
 	$(PYTHON) run -- python -m mkdocs serve
 
 ## Deploy documentation to GitHub Pages
