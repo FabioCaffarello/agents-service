@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    uses: ./.github/workflows/ci-main.yml
+    with:
+      final-commands: |
+        make lint
+
+  check:
+    name: Check
+    uses: ./.github/workflows/ci-main.yml
+    with:
+      final-commands: |
+        make test
