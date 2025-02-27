@@ -56,9 +56,12 @@ coverage:
 	uv run coverage erase
 	@echo "Running tests with coverage..."
 	COVERAGE_FILE=.coverage.single $(PYTHON) run pytest --maxfail=1 --disable-warnings --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
-	@echo "Erasing internal coverage data..."
-	uv run coverage erase
-	sleep 1
+	@echo "Combining coverage files..."
+	uv run coverage combine
+	@echo "Generating report..."
+	uv run coverage report --fail-under=80
+	@echo "Removing generated coverage file..."
+	rm -f .coverage.single*
 
 ## Run pre-commit hooks
 precommit:
