@@ -1,9 +1,6 @@
 name: Deafult
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
 
 jobs:
@@ -21,4 +18,4 @@ jobs:
     uses: ./.github/workflows/ci-main.yml
     with:
       final-commands: |
-        echo "make check"
+        make coverage
