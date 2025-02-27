@@ -6,5 +6,11 @@ authors = [{name = "Fabio Luiz Meireles Caffarello", email = "fabio.caffarello@g
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+]
+
+[dependency-groups]
+dev = [
     "pre-commit>=4.1.0",
+    "pytest>=8.3.4",
+    "ruff>=0.9.7",
 ]

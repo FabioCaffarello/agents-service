@@ -55,3 +55,22 @@ repos:
       - id: shellcheck
         name: ShellCheck
         files: \.sh$
+
+  # Custom local hook to run `make clean`
+  - repo: local
+    hooks:
+      - id: make-clean
+        name: Run Make Clean
+        entry: make clean
+        language: system
+        always_run: true
+        pass_filenames: false
+
+  # Custom pre-push hook to run tests
+  - repo: local
+    hooks:
+      - id: pre-push-make-test
+        name: Run `make test` before push
+        entry: make test
+        language: system
+        stages: [push]
