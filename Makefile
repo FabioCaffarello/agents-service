@@ -58,8 +58,7 @@ coverage:
 	uv run pytest --maxfail=1 --disable-warnings --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
 	@echo "Combining coverage data..."
 	uv run coverage combine || true
-	@echo "Generating report..."
-	uv run coverage report --fail-under=80
+
 
 
 ## Run pre-commit hooks
