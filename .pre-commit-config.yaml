@@ -39,14 +39,16 @@ repos:
     hooks:
       - id: detect-secrets  # Detect sensitive data (e.g., API keys)
 
-  # Check for security vulnerabilities in dependencies
   - repo: local
     hooks:
       - id: safety
         name: safety
         entry: safety check --full-report
-        language: system
+        language: python
+        additional_dependencies: [safety>=2.3.4]
+        pass_filenames: false
         types: [python]
+
 
   # Dockerfile best practices
   - repo: local
