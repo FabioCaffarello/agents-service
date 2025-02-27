@@ -149,7 +149,7 @@ jobs:
       # ---------------------------------------------------
       # 13) POST COVERAGE REPORT AS PR COMMENT
       # ---------------------------------------------------
-      - name: Post Coverage Report as PR Comment
+      - name: Post Coverage Report as Master Comment
         if: ${{ github.event_name == 'pull_request' && inputs.use-coverage == true }}
         uses: actions/github-script@v6
         with:
@@ -157,7 +157,35 @@ jobs:
             const fs = require('fs');
             // Read the entire coverage report from cov-report.txt
             const reportText = fs.readFileSync('cov-report.txt', 'utf8');
-            const commentBody = `${reportText}`;
+
+            // Find the line that starts with 'TOTAL' to extract overall coverage
+            const totalLine = reportText.split('\n').find(line => line.trim().startsWith('TOTAL'));
+            let overallCoverage = "N/A";
+            if (totalLine) {
+              // Assume the TOTAL line has columns like: TOTAL  <st>  <miss>  <cover>
+              // For example: "TOTAL     16      0   100%"
+              const parts = totalLine.trim().split(/\s+/);
+              if (parts.length >= 4) {
+                overallCoverage = parts[3] + "%";
+              }
+            }
+
+            // Construct a master, dry and wise comment
+            const commentBody = `
+            **Master Coverage Report**
+
+            In the pursuit of excellence and maintainability, our code's overall test coverage stands at **${overallCoverage}**.
+
+            > *"Quality is not an act, it is a habit."* – Aristotle
+
+            For the details, please review the full report below:
+
+            \`\`\`
+            ${reportText}
+            \`\`\`
+            `;
+
+            // Post the comment on the PR
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
