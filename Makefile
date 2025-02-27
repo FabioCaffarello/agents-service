@@ -36,7 +36,6 @@ check:
 
 ## Run tests using pytest with coverage
 coverage:
-	rm -f .coverage*
 	uv run coverage erase
 	$(PYTHON) run pytest --cov=$(PACKAGES_DIR) --cov-report=term-missing --cov-config=.coveragerc
 
