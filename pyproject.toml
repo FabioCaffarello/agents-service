@@ -22,6 +22,7 @@ dependencies = [
     "langchain-openai>=0.3.7",
     "langgraph>=0.3.2",
     "grandalf>=0.8",
+    "aiohttp>=3.11.13",
 ]
 
 [tool.uv.workspace]

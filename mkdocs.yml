@@ -45,6 +45,7 @@ plugins:
 watch:
   - packages
   - src
+  - examples
 
 extra_css:
   - css/github-permalink-style.css

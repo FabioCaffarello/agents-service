@@ -49,7 +49,7 @@ ROBOTSTXT_OBEY = False
 # }
 
 DOWNLOADER_MIDDLEWARES = {
-    "scrapy_agent.middlewares.ReportingMiddleware": 543,
+    # "scrapy_agent.middlewares.ReportingMiddleware": 543,
 }
 
 # Enable or disable downloader middlewares

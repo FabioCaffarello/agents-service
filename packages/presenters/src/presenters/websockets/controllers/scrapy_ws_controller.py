@@ -1,6 +1,7 @@
 import json
 import logging
-from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
+from security.dependencies import get_current_user_ws
 from application.usecases.agentic.orchestrator_usecase import OrchestratorUseCase
 
 log = logging.getLogger("scrapy_ws_controller")
@@ -38,24 +39,22 @@ async def websocket_scrapy(websocket: WebSocket, bot_name: str):
 
 
 @router.websocket("/ws/scrapy/{bot_name}/errors")
-async def websocket_scrapy_errors(websocket: WebSocket, bot_name: str):
-    """
-    Unprotected WebSocket endpoint for receiving error payloads.
-    The URL includes the bot's name for identification.
-    This endpoint processes the error payload and logs it locally.
-    """
+async def websocket_scrapy_errors(
+    websocket: WebSocket,
+    bot_name: str,
+    user=Depends(get_current_user_ws),  # Use the WebSocket-specific dependency.
+):
     await websocket.accept()
-    log.info(f"Scrapy Error WebSocket connection accepted for bot: {bot_name}")
+    log.info(
+        f"Scrapy Error WebSocket connection accepted for bot: {bot_name} (user: {user['sub']})"
+    )
     try:
         while True:
             data = await websocket.receive_text()
             log.debug(f"Received error payload from bot '{bot_name}': {data}")
-
-            # Assume the payload is JSON formatted.
             payload = json.loads(data)
             report = await orchestrator_usecase.process_bot_payload(bot_name, payload)
             log.debug(f"Generated error report for bot '{bot_name}': {report}")
-            # Log the error message locally.
             log.error(f"Error from bot '{bot_name}': {payload['error']}")
     except WebSocketDisconnect:
         log.info(f"Bot '{bot_name}' Error WebSocket disconnected.")
