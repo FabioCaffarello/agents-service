@@ -7,15 +7,49 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "logger",
-    "cliargs"
+    "cliargs",
+    "config",
+    "presenters",
+    "application",
+    "security",
+    "agents",
+    "agents-core",
+    "agents-orchestrators",
+    "agents-workflows",
+    "fastapi>=0.115.10",
+    "uvicorn>=0.34.0",
+    "pyjwt>=2.10.1",
+    "langchain-openai>=0.3.7",
+    "langgraph>=0.3.2",
+    "grandalf>=0.8",
 ]
 
 [tool.uv.workspace]
-members = ["packages/*"]
+members = [
+    "packages/agents-graph/agents-core",
+    "packages/application",
+    "packages/cliargs",
+    "packages/config",
+    "packages/logger",
+    "packages/presenters",
+    "packages/security",
+    "examples/*",
+    "packages/agents-graph/agents-orchestrators",
+    "packages/agents-graph/agents-workflows",
+    "packages/agents-graph/agents",
+]
 
 [tool.uv.sources]
 logger = { workspace = true }
 cliargs = { workspace = true }
+config = { workspace = true }
+presenters = { workspace = true }
+application = { workspace = true }
+security = { workspace = true }
+agents_core = { workspace = true }
+agents_orchestrators = { workspace = true }
+agents_workflows = { workspace = true }
+agents = { workspace = true }
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/server"]
@@ -47,6 +81,10 @@ docs = [
 ]
 labs = [
     "ipykernel>=6.29.5",
+]
+scrapy-example = [
+    "scrapy>=2.12.0",
+    "websockets>=15.0"
 ]
 
 [build-system]

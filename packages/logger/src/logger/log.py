@@ -31,3 +31,17 @@ def setup_logging(
     logger.propagate = propagate
     logger.setLevel(logging.getLevelName(log_level))
     return logger
+
+
+def get_logger_from_env(module_name: str) -> logging.Logger:
+    """
+    Get a logger using the `LOG_LEVEL` environment variable.
+
+    Args:
+        module_name (str): The module name.
+
+    Returns:
+        The logger.
+    """
+    log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+    return setup_logging(module_name, log_level=log_level)
