@@ -6,6 +6,7 @@ import mkdocs_gen_files
 src_root = Path(".")
 
 
+# Process custom patterns
 def process_patterns(project_path, custom_patterns):
     for pattern in custom_patterns:
         for path in src_root.glob(pattern):
@@ -25,7 +26,6 @@ def walk_and_process_parent_dir(project_path):
         if parent_path == src_root:
             break
 
-        # Process the parent directory's README
         custom_patterns = [
             f"{dir_path}/README.md",
         ]
@@ -34,6 +34,7 @@ def walk_and_process_parent_dir(project_path):
         parent_path = parent_path.parent
 
 
+# Render Python docstrings
 def render_python_docstring(path: Path):
     with path.open("r", encoding="utf-8") as file:
         content = file.read()
@@ -59,6 +60,20 @@ def render_python_docstring(path: Path):
 
             mkdocs_gen_files.set_edit_path(doc_normalized_path, f"../{py_path}")
 
+
+# Process the README in the ./src directory
+def process_src_readme():
+    src_readme = src_root / "src" / "README.md"
+    if src_readme.exists():
+        doc_path = Path("reference", "src", "README.md")
+        with mkdocs_gen_files.open(doc_path, "wb") as f:
+            f.write(src_readme.read_bytes())
+        mkdocs_gen_files.set_edit_path(doc_path, f"../{src_readme}")
+    else:
+        print("README not found in ./src")
+
+
+process_src_readme()
 
 # Process individual projects
 for path in src_root.rglob("pyproject.toml"):
