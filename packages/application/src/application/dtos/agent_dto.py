@@ -50,3 +50,18 @@ class ScrapingPayloadDTO:
             response=ResponseDTO(**response_data),
             bot_name=payload.get("bot_name", ""),
         )
+
+
+@dataclass
+class ScrapingErrorPayloadDTO:
+    usage_context: str
+    error: str
+    bot_name: str
+
+    @classmethod
+    def from_dict(cls, payload: dict) -> "ScrapingErrorPayloadDTO":
+        return cls(
+            usage_context=payload.get("usage_context", "scraping-error"),
+            error=payload.get("error", ""),
+            bot_name=payload.get("bot_name", ""),
+        )

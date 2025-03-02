@@ -29,6 +29,10 @@ class DynamicAgentFactory:
                     "prompt_template": "Add a surprising twist to this joke: {improved_joke}"
                 },
             },
+            {
+                "alias": "ip_detector",
+                "class_path": "agents.scraping_agents.IPBlockDetectorAgent",
+            },
         ]
 
     def create_agent(self, alias: str) -> BaseAgent:

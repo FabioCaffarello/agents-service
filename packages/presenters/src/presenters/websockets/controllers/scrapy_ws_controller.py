@@ -35,3 +35,27 @@ async def websocket_scrapy(websocket: WebSocket, bot_name: str):
             await websocket.send_json(report)
     except WebSocketDisconnect:
         log.info(f"Bot '{bot_name}' WebSocket disconnected.")
+
+
+@router.websocket("/ws/scrapy/{bot_name}/errors")
+async def websocket_scrapy_errors(websocket: WebSocket, bot_name: str):
+    """
+    Unprotected WebSocket endpoint for receiving error payloads.
+    The URL includes the bot's name for identification.
+    This endpoint processes the error payload and logs it locally.
+    """
+    await websocket.accept()
+    log.info(f"Scrapy Error WebSocket connection accepted for bot: {bot_name}")
+    try:
+        while True:
+            data = await websocket.receive_text()
+            log.debug(f"Received error payload from bot '{bot_name}': {data}")
+
+            # Assume the payload is JSON formatted.
+            payload = json.loads(data)
+            report = await orchestrator_usecase.process_bot_payload(bot_name, payload)
+            log.debug(f"Generated error report for bot '{bot_name}': {report}")
+            # Log the error message locally.
+            log.error(f"Error from bot '{bot_name}': {payload['error']}")
+    except WebSocketDisconnect:
+        log.info(f"Bot '{bot_name}' Error WebSocket disconnected.")

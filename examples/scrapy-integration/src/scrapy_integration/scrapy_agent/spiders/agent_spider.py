@@ -10,4 +10,4 @@ class AgentSpiderSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        pass
+        raise Exception("Simulated error for testing error reporting extension")

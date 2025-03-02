@@ -1,5 +1,6 @@
 from logger.log import get_logger_from_env
 from agents_orchestrators.scrapping_orchestrator import ScrapingOrchestrator
+from agents_orchestrators.scrapping_error_orchestrator import ScrapingErrorOrchestrator
 from agents_core.model_config import ModelConfig
 
 log = get_logger_from_env(__file__)
@@ -41,7 +42,7 @@ class OrchestratorRouter:
         # Pre-instantiate orchestrator variants or use lazy instantiation.
         self.orchestrators = {
             "scraping": ScrapingOrchestrator(model_config),
-            # Additional contexts can be added here.
+            "scraping-error": ScrapingErrorOrchestrator(model_config),
         }
 
     def get_orchestrator(self, usage_context: str):

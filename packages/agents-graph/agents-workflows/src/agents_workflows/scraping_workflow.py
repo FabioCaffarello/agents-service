@@ -1,27 +1,11 @@
 import asyncio
-import subprocess
 from typing_extensions import TypedDict
 from logger.log import get_logger_from_env
 from langgraph.graph import StateGraph, START, END
 from application.dtos.agent_dto import ScrapingPayloadDTO
 from agents_core.dynamic_agent_factory import DynamicAgentFactory
 
-
 log = get_logger_from_env(__file__)
-
-
-def render_mermaid_diagram(
-    mermaid_text: str, mmd_file: str = "diagram.mmd", output_file: str = "diagram.png"
-):
-    # Save the Mermaid code to a file.
-    with open(mmd_file, "w") as f:
-        f.write(mermaid_text)
-    try:
-        # Run Mermaid CLI to generate a PNG.
-        subprocess.run(["mmdc", "-i", mmd_file, "-o", output_file], check=True)
-        print(f"Mermaid diagram rendered and saved to {output_file}")
-    except Exception as e:
-        print(f"Error rendering mermaid diagram: {e}")
 
 
 class State(TypedDict):
@@ -29,6 +13,9 @@ class State(TypedDict):
     joke: str
     improved_joke: str
     final_joke: str
+    ip_blocked: bool
+    ip_reason: str
+    combined_output: str
 
 
 class ScrapingWorkflow:
@@ -44,7 +31,8 @@ class ScrapingWorkflow:
         await asyncio.sleep(0.5)
         workflow = StateGraph(State)
 
-        # Dynamically create agents using the factory.
+        # Dynamically create agents.
+        ip_detector = self.agent_factory.create_agent("ip_detector")
         gen_agent = self.agent_factory.create_agent("joke_generator")
         improve_agent = self.agent_factory.create_agent("joke_improver")
         polish_agent = self.agent_factory.create_agent("joke_polisher")
@@ -60,7 +48,40 @@ class ScrapingWorkflow:
             "joke_polisher",
             lambda state: polish_agent.run(improved_joke=state["improved_joke"]),
         )
+        # IP detector node; its result will be stored under "ip_detector".
+        workflow.add_node(
+            "ip_detector",
+            lambda state: ip_detector.run(
+                status=self.payload.response.status,
+                headers=self.payload.response.headers,
+            ),
+        )
 
+        # Aggregator node.
+        def format_topic(state: dict) -> str:
+            topic = state.get("topic", "N/A")
+            return f"Topic: {topic}"
+
+        def format_joke(state: dict) -> str:
+            if state.get("joke"):
+                return f"Initial Joke: {state['joke']}"
+            return "Initial Joke: N/A"
+
+        def format_ip_info(state: dict) -> str:
+            status_line = "BLOCKED" if state.get("ip_blocked") else "Not Blocked"
+            reason = state.get("ip_reason", "No block indicators detected")
+            return f"IP Detector: {status_line} ({reason})"
+
+        def aggregator(state: dict) -> dict:
+            parts = [format_topic(state), format_joke(state), format_ip_info(state)]
+            combined = "\n".join(parts)
+            return {"combined_output": combined}
+
+        workflow.add_node("aggregator", aggregator)
+
+        # Build edges: run ip_detector and joke_generator in parallel,
+        # then merge their outputs in aggregator.
+        workflow.add_edge(START, "ip_detector")
         workflow.add_edge(START, "joke_generator")
         workflow.add_conditional_edges(
             "joke_generator",
@@ -68,6 +89,9 @@ class ScrapingWorkflow:
             {"Fail": "joke_improver", "Pass": END},
         )
         workflow.add_edge("joke_improver", "joke_polisher")
+        workflow.add_edge("ip_detector", "aggregator")
+        workflow.add_edge("joke_generator", "aggregator")
+        workflow.add_edge("aggregator", END)
         workflow.add_edge("joke_polisher", END)
 
         chain = workflow.compile()
@@ -89,11 +113,16 @@ class ScrapingWorkflow:
         else:
             log.debug("Joke failed quality gate - no punchline detected!")
 
+        log.debug("\n---")
+        log.debug("State")
+        log.debug(state)
+        log.debug("\n---")
+
         return {
             "usage": "scraping",
             "bot_name": self.payload.bot_name,
             "processed_data": self.payload,
-            "message": "Processed using ScrapingWorkflow.",
+            "message": state["combined_output"],
         }
 
     def check_punchline(self, state: State):
