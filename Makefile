@@ -85,3 +85,8 @@ clean:
 	# Remove all .pyc files
 	find . -type f -name "*.pyc" -delete
 	@echo "Clean complete."
+
+e2e-scrapy:
+	@echo "Running Scrapy E2E tests..."
+	@cd examples/scrapy-integration/src/scrapy_integration && scrapy crawl agent-spider
+	@cd ../../../..
